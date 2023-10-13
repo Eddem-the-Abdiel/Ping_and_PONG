@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc6r6ggi1x2kf"]
+
+[ext_resource type="PackedScene" uid="uid://clxbabir0v374" path="res://player.tscn" id="1_mwuh8"]
+[ext_resource type="Script" path="res://Game.gd" id="1_sdajg"]
+[ext_resource type="PackedScene" uid="uid://cvipaok8s7kq3" path="res://ball.tscn" id="2_o7gj0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c3rf"]
+size = Vector2(1162, 154)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_sdajg")
+
+[node name="Topo" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Topo"]
+position = Vector2(571, -67)
+shape = SubResource("RectangleShape2D_8c3rf")
+
+[node name="Fundo" type="Area2D" parent="."]
+position = Vector2(0, 773)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fundo"]
+position = Vector2(571, -67)
+shape = SubResource("RectangleShape2D_8c3rf")
+
+[node name="Esquerda" type="Area2D" parent="."]
+position = Vector2(-136, -88)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Esquerda"]
+position = Vector2(571, -67)
+shape = SubResource("RectangleShape2D_8c3rf")
+
+[node name="Direita" type="Area2D" parent="."]
+position = Vector2(1144, -88)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direita"]
+position = Vector2(571, -67)
+shape = SubResource("RectangleShape2D_8c3rf")
+
+[node name="Player" parent="." instance=ExtResource("1_mwuh8")]
+position = Vector2(128, 320)
+
+[node name="Player2" parent="." instance=ExtResource("1_mwuh8")]
+position = Vector2(1024, 312)
+side = "p2"
+
+[node name="Ball" parent="." instance=ExtResource("2_o7gj0")]
+position = Vector2(576, 320)
+
+[connection signal="body_entered" from="Topo" to="." method="_on_topo_body_entered"]
+[connection signal="body_entered" from="Fundo" to="." method="_on_fundo_body_entered"]
+[connection signal="body_entered" from="Esquerda" to="." method="_on_esquerda_body_entered"]
+[connection signal="body_entered" from="Direita" to="." method="_on_direita_body_entered"]
